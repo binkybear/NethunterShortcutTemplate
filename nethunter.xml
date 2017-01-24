@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <!-- Point our /build to /vendor/nethunter instead of /vendor/cm -->
+  <remove-project path="build" name="LineageOS/android_build" groups="pdk,tradefed" />
+  <project path="build" name="nethunteros/android_build" remote="github" revision="cm-14.1" groups="pdk,tradefed">
+    <copyfile src="core/root.mk" dest="Makefile" />
+  </project>
+  
+ <!-- Use our vendor/nethunter instead of vendor/cm -->
+ <remove-project path="vendor/cm" name="LineageOS/android_vendor_cm" />
+  
+ <!-- Developer settings is broken for us on LineageOS -->
+ <remove-project path="packages/apps/Settings" name="LineageOS/android_packages_apps_Settings" groups="pdk-fs" />
+ <project path="packages/apps/Settings" name="nethunteros/android_packages_apps_Settings" groups="pdk-fs" revision="cm-14.1" />
+ 
+ <!-- Use Nethunter frameworks base so we can play with network settings -->
+ <remove-project path="frameworks/base" name="LineageOS/android_frameworks_base" groups="pdk-cw-fs,pdk-fs" />
+ <project path="frameworks/base" name="nethunteros/android_frameworks_base" groups="pdk-cw-fs,pdk-fs" />
+  
+ <!-- Qcom sepolicy needs our path instead of vendor/cm -->
+ <remove-project path="device/qcom/sepolicy" name="LineageOS/android_device_qcom_sepolicy" />
+ <project path="device/qcom/sepolicy" name="nethunteros/android_device_qcom_sepolicy" />
+  
+  <!-- Qcom bt caf fixes -->
+ <remove-project path="hardware/qcom/bt-caf" name="LineageOS/android_hardware_qcom_bt" groups="qcom" revision="cm-14.1-caf" />
+ <project path="hardware/qcom/bt-caf" name="nethunteros/android_hardware_qcom_bt" groups="qcom" revision="cm-14.1-caf" />
+  
+ <!-- remove default android terminal for Nethunter Terminal -->
+ <remove-project path="packages/apps/Terminal" name="LineageOS/android_packages_apps_Terminal" groups="pdk-fs" />
+
+ <!-- nethunter vendor prebuilts --> 
+ <project path="vendor/nethunter" name="nethunteros/vendor_nethunter" remote="github" revision="cm-14.1" />
+ 
+ <!-- nethunter specific apps --> 
+ <project path="packages/apps/Nethunter" name="offensive-security/nethunter-app" remote="github" revision="master" />
+ <project path="packages/apps/Terminal" name="binkybear/Android-Terminal-Emulator" remote="github" revision="nethunter" />
+ <project path="packages/apps/androidVNC" name="binkybear/androidVNC" remote="github" revision="master" />
+ 
+ <!-- system binaries -->
+ <project path="prebuilts/busybox" name="nethunteros/platform_prebuilts_busybox" remote="github" revision="master" />
+ <project path="prebuilts/hidkeyboard" name="nethunteros/platform_prebuilts_hidkeyboard" remote="github" revision="master" />
+
+ <!-- application addons -->
+ <project path="packages/apps/F-Droid" name="f-droid/fdroidclient" groups="pdk-fs" remote="github" revision="master" />
+ <project path="packages/apps/Drivedroid" name="nethunteros/android_packages_apps_Drivedroid" remote="github" revision="master" />
+
+ <!-- add our icons to desktop -->
+ <remove-project path="packages/apps/Trebuchet" name="LineageOS/android_packages_apps_Trebuchet" />  
+ <project path="packages/apps/Trebuchet" name="nethunteros/android_packages_apps_Trebuchet" />
+</manifest>

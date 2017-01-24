@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  
+  <remote fetch="https://github.com/AndDiSa/" name="ads" />
+  
+  <!-- TheMuppets -->
+  <project path="vendor/samsung" name="proprietary_vendor_samsung" remote="themuppets" revision="cm-14.1" />
+  <project path="vendor/oppo" name="proprietary_vendor_oppo" remote="themuppets" revision="cm-14.1" />
+  <project path="vendor/oneplus" name="proprietary_vendor_oneplus" remote="themuppets" revision="cm-14.1" />
+  <project path="vendor/htc" name="proprietary_vendor_htc" remote="themuppets" revision="cm-14.1" />
+  <project path="vendor/motorola" name="proprietary_vendor_motorola" remote="themuppets" revision="cm-14.1" />
+  <project path="vendor/lge" name="proprietary_vendor_lge" remote="themuppets" revision="cm-14.1" />
+  <project path="vendor/qcom/binaries" name="proprietary_vendor_qcom_binaries" remote="themuppets" revision="cm-14.1" />
+  <project path="vendor/nxp" name="proprietary_vendor_nxp" remote="themuppets" revision="cm-14.1" />
+ 
+ <!-- For Grouper! -->
+ <project path="vendor/asus" name="Unlegacy-Android/proprietary_vendor_asus" remote="github" groups="vendor,asus" revision="aosp-7.1" />
+ <project path="vendor/bn" name="Unlegacy-Android/proprietary_vendor_bn" remote="github" groups="vendor,bn" revision="stable" />
+ <project path="vendor/broadcom" name="Unlegacy-Android/proprietary_vendor_broadcom" remote="github" groups="vendor,broadcom" revision="aosp-7.1" />
+ <project path="vendor/nvidia" name="Unlegacy-Android/proprietary_vendor_nvidia" remote="github" revision="aosp-7.1" />
+ <project path="vendor/elan" name="proprietary_vendor_elan" remote="ads" revision="oct-mm" />
+ <project path="vendor/invensense" name="Unlegacy-Android/proprietary_vendor_invensense" remote="github" groups="vendor,invensense" revision="aosp-7.1" />
+ <project path="vendor/widevine" name="Unlegacy-Android/proprietary_vendor_widevine" remote="github" groups="vendor,widevine" revision="aosp-7.1" />
+  
+</manifest>

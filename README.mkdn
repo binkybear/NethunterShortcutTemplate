@@ -1,0 +1,82 @@
+Getting Started
+---------------
+
+To get started with Android/CyanogenMod, you'll need to get
+familiar with [Git and Repo](http://source.android.com/source/using-repo.html).
+
+To initialize your local repository using the CyanogenMod trees, use a command like this:
+
+    repo init -u git://github.com/nethunteros/manifest.git -b cm-14.1
+
+Then to sync up:
+
+    repo sync
+    
+# Building a Nethunter OS ROM
+
+## OS Used
+
+Please use Ubuntu Server (latest version) for consistency
+
+## Setup Envrionment
+
+For fruther instructions see: https://source.android.com/source/initializing.html
+```
+sudo apt-get update
+sudo apt install -y init-system-helpers
+sudo apt install -y openjdk-8-jdk git-core gnupg flex bison gperf build-essential \
+zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 \
+lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev ccache \
+libgl1-mesa-dev libxml2-utils xsltproc unzip schedtool bc maven repo
+```
+## NDK SETUP
+```
+mkdir -p /ndk
+cd /ndk
+wget https://dl.google.com/android/repository/android-ndk-r13b-linux-x86_64.zip
+unzip android-ndk-r1*
+echo "export NDK_ROOT=/ndk/android-ndk-r13b/" >> ~/.bashrc
+echo 'export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$NDK_ROOT' >> ~/.bashrc
+```
+## GRADLE SETUP (optional)
+```
+curl -s https://get.sdkman.io | bash
+source "/root/.sdkman/bin/sdkman-init.sh"
+sdk install gradle 3.1
+```
+### Setup Cache
+```
+echo "export USE_CCACHE=1" >> ~/.bashrc
+echo "export CCACHE_DIR=$HOME/.ccache" >> ~/.bashrc
+source ~/.bashrc
+```
+### Setup git user (Change your name/email)
+```
+git config --global user.name "your name" 
+git config --global user.email "yourname@email.com"
+```
+### Fix broken CM ssl cert (may only be temp)
+```
+openssl s_client -showcerts -connect maven.cyanogenmod.org:443 > ssl.cyanogenmod.org.crt 
+mv ssl.cyanogenmod.org.crt /usr/local/share/ca-certificates
+update-ca-certificates --fresh 
+```
+### Sync Repo
+```
+mkdir -p /android/system
+cd /android/system
+repo init -u git://github.com/nethunteros/manifest.git -b cm-14.1
+repo sync
+```
+### Special terminal properties
+```
+echo "ndk.dir=/ndk/android-ndk-r13b/" > packages/apps/Terminal/local.properties
+```
+### Make the ROM
+```
+cd /android/system
+ccache -M 100G
+source build/envsetup.sh
+lunch
+mka bacon
+```
