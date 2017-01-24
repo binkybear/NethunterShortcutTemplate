@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote  name="themuppets"
+           fetch="https://github.com/TheMuppets/" />
+
+  <!-- Includes -->
+  <include name="cm.xml" />
+  <include name="nethunter.xml" />
+  <include name="vendor.xml" />
+
+  <!-- Devices -->
+  <include name="devices/devices.xml" />
+
+</manifest>
