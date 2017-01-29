@@ -15,8 +15,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,25 +27,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Initializing button
-        Button buttonRequestPermission = (Button) findViewById(R.id.launchButton);
-
-        //Adding a click listener
-        buttonRequestPermission.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 //First checking if the app is already having the permission
                 if(isTerminalAllowed()){
                     // This is where we actually launch the app.  We pass the terminal command in intentClickListener
                     Log.d("MainActivity", "Launch terminal here");
-
                     intentClickListener_NH("wifite");
-                }
+
+                } else {
 
                 // No Permission!
                 requestStoragePermission();
             }
-        });
+
     }
 
     //We are calling this method to check the permission status
@@ -100,11 +91,16 @@ public class MainActivity extends AppCompatActivity {
             Intent intent =
                     new Intent("com.offsec.nhterm.RUN_SCRIPT_NH");
             intent.addCategory(Intent.CATEGORY_DEFAULT);
-
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra("com.offsec.nhterm.iInitialCommand", command);
             startActivity(intent);
         } catch (Exception e) {
             Toast.makeText(this,"Error launching intent",Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void exit()
+    {
+        System.exit(0);
     }
 }
